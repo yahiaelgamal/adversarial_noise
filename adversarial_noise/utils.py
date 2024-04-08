@@ -108,7 +108,10 @@ def classify_image(
     image = Image.open(image_path)
     transformed_image: torch.Tensor = img_transform_fn(image)  # type: ignore
 
-    model = models.__dict__[model_name](weights=True)
+    model = models.__dict__[model_name](
+        weights=models.get_model_weights(model_name).DEFAULT  # type:ignore
+    )
+
     model.eval()
     with torch.no_grad():
         outputs = torch.nn.Softmax(0)(model(transformed_image.unsqueeze(0)))

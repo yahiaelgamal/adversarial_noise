@@ -36,8 +36,9 @@ class AdvNoiseNetwork(torch.nn.Module):
     def __init__(self, model_name: str):
         torch.nn.Module.__init__(self)
         self.vision_model_name = model_name
-        # TODO fix deprecation warning of weights parameter
-        self.pretrained_model = models.__dict__[model_name](weights=True)
+        self.pretrained_model = models.__dict__[model_name](
+            weights=models.get_model_weights(model_name).DEFAULT  # type:ignore
+        )
         self.pretrained_model.eval()
         for param in self.pretrained_model.parameters():
             param.require_grad = False
@@ -65,12 +66,26 @@ class AdvNoiseNetwork(torch.nn.Module):
     default="input_images/example_image4.jpg",
 )
 @click.option("--target_class", type=str, required=True, default="volcano")
+@click.option(
+    "--output_image_path",
+    type=click.Path(exists=False),
+    required=True,
+    default="output_image.jpg",
+)
 @click.option("--model_name", type=str, required=False, default="resnet152")
 @click.option("--max_iterations", type=int, required=False, default=50)
 def cli_generate_adv_noisy_image(
-    image_path: str, target_class: str, model_name: str, max_iterations: int
+    image_path: str,
+    target_class: str,
+    output_image_path: str,
+    model_name: str,
+    max_iterations: int,
 ):
     target_class_index = get_target_class_index(target_class)
+    if model_name not in models.list_models():
+        raise ValueError(
+            f"{model_name} is not supported in torchvision.models.list_models()"
+        )
 
     # load image
     image = Image.open(image_path)
@@ -121,7 +136,6 @@ def cli_generate_adv_noisy_image(
 
         if iter % 10 == 0 or stable_loss:
             noisy_image_tensor = transformed_image + adv_net.noise_vector
-            output_image_path = f"image_{iter}.jpg"
             save_image(noisy_image_tensor, output_image_path)
             # sanity check that nothing is wrong
             pprint(
