@@ -22,8 +22,8 @@ from torchvision import models
 IMAGE_SIZE = 256
 CENTER_CROP = 224
 
-NOISE_SCALE = 0.1  # used to initialize the noise vector
-NOISE_LOSS_PARAM = 0.01  # to control how much weight to give to noise minimization
+NOISE_SCALE = 0.001  # used to initialize the noise vector
+NOISE_LOSS_PARAM = 0.001  # to control how much weight to give to noise minimization
 EARLY_STOP_LOSS_DELTA = 1e-4  # to control when to stop
 
 img_transform_fn = transforms.Compose(
@@ -70,7 +70,7 @@ class AdvNoiseNetwork(torch.nn.Module):
     required=True,
     default="input_images/example_image4.jpg",
 )
-@click.option("--target_class", type=str, required=True, default="volcano")
+@click.option("--target_class", type=str, required=True, default="screw")
 @click.option(
     "--output_image_path",
     type=click.Path(exists=False),
@@ -120,7 +120,7 @@ def cli_generate_adv_noisy_image(
         prev_loss = loss
         loss = -1 * torch.log(
             torch.nn.Sigmoid()(output[0, target_class_index])
-        ) + NOISE_LOSS_PARAM * torch.mean(torch.abs(adv_net.noise_vector))
+        ) + NOISE_LOSS_PARAM * torch.sum(torch.abs(adv_net.noise_vector))
 
         # TODO  add another loss term to minimize the noise
         target_clss_prob = round(
