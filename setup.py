@@ -5,9 +5,9 @@ with open('requirements.txt') as f:
     requirements = f.read().splitlines()
 
 setup(
-    name='adversial_noise',
+    name='adversarial_noise',
     version='1.0',
-    description='A Python package for adding adversial noise to images using PyTorch.',
+    description='A Python package for adding adversarial noise to images using PyTorch.',
     author='Yahia Elgamal',
     author_email='yahiaelgamal@gmail.com',
     # packages=find_packages(),

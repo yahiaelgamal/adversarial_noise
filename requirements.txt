@@ -3,4 +3,4 @@ torchvision
 pydantic
 omegaconf
 mlflow
-pytorch-lightning
+click

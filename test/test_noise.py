@@ -3,7 +3,7 @@ import torchvision.models as models
 import torchvision.transforms as transforms
 from PIL import Image
 import numpy as np
-from adversial_noise.utils  import RemoveAlphaChannel, add_gaussian_noise, get_imagenet_classes, denormalize
+from adversarial_noise.utils  import RemoveAlphaChannel, add_gaussian_noise, denormalize, get_imagenet_topk_classes
 import pytest
 
 def test_denormalize():
@@ -41,6 +41,7 @@ def test_noise_addition_no_transform():
     # Load the image
     image = Image.open('input_images/example_image4.jpg')
     transformed_image =  transform(image)
+    assert isinstance(transformed_image, torch.Tensor)
     noisy_image = add_gaussian_noise(transformed_image, 0, 0)
     assert torch.all(transformed_image == noisy_image).item() 
 
@@ -60,7 +61,7 @@ def test_resnet_prediction():
 
     # Load the image
     image = Image.open('input_images/example_image4.jpg')
-    transformed_image =  transform(image)
+    transformed_image: torch.Tensor = transform(image)  # type: ignore
 
     model_name = 'resnet152'
     model = models. __dict__[model_name](pretrained=True)
@@ -69,6 +70,6 @@ def test_resnet_prediction():
     with torch.no_grad():
         output = model(transformed_image.unsqueeze(0))
         probabilities = torch.nn.functional.softmax(output[0], dim=0)
-        classes = get_imagenet_classes(probabilities, 1)
-        assert list(classes.keys())[0] == '60, night_snake'
+        classes = get_imagenet_topk_classes(probabilities, 1)
+        assert list(classes.keys())[0] == 'night_snake'
     
