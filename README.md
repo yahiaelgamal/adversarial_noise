@@ -2,7 +2,8 @@
 0.  `cd` to this repo
 1. `pip install -r requirements.txt`
 2. `pip install -e .`
-3. ```python adversarial_noise/model.py --image_path 'input_images/example_image4.jpg' \
+```
+   python adversarial_noise/model.py --image_path 'input_images/example_image4.jpg' \
   --target_class volcano \
   --output_image_path output_image.jpg \
   --model_name resnet152 \
