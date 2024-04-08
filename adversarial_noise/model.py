@@ -1,14 +1,17 @@
+import math
 import sys
 from pprint import pprint
 from typing import Dict, List, Optional
 
 import click
+import numpy as np
 import torch
 import torchvision.transforms as transforms
 from adversarial_noise.constants import NORM_MEANS, NORM_STDS
 from adversarial_noise.utils import (
     RemoveAlphaChannel,
     classify_image,
+    get_imagenet_class_prob,
     get_imagenet_topk_classes,
     get_target_class_index,
     save_image,
@@ -19,7 +22,9 @@ from torchvision import models
 IMAGE_SIZE = 256
 CENTER_CROP = 224
 
-NOISE_SCALE = 0.001
+NOISE_SCALE = 0.1  # used to initialize the noise vector
+NOISE_LOSS_PARAM = 0.01  # to control how much weight to give to noise minimization
+EARLY_STOP_LOSS_DELTA = 1e-4  # to control when to stop
 
 img_transform_fn = transforms.Compose(
     [
@@ -45,7 +50,7 @@ class AdvNoiseNetwork(torch.nn.Module):
 
         # TODO make this generic
         # self.noise_vector = torch.rand(size=(3, IMAGE_SIZE-2, IMAGE_SIZE-2))
-        self.noise_vector = (
+        self.noise_vector = torch.nn.Parameter(
             torch.rand(size=(3, CENTER_CROP, CENTER_CROP), requires_grad=True)
             * NOISE_SCALE
         )
@@ -74,12 +79,16 @@ class AdvNoiseNetwork(torch.nn.Module):
 )
 @click.option("--model_name", type=str, required=False, default="resnet152")
 @click.option("--max_iterations", type=int, required=False, default=50)
+@click.option("--output_intermediary_images", type=bool, required=False, default=True)
+@click.option("--output_intermediary_noise", type=bool, required=False, default=True)
 def cli_generate_adv_noisy_image(
     image_path: str,
     target_class: str,
     output_image_path: str,
     model_name: str,
     max_iterations: int,
+    output_intermediary_images: bool,
+    output_intermediary_noise: bool,
 ):
     target_class_index = get_target_class_index(target_class)
     if model_name not in models.list_models():
@@ -99,7 +108,8 @@ def cli_generate_adv_noisy_image(
         orig_output = adv_net.pretrained_model(transformed_image.unsqueeze(0)).squeeze()
         orig_probs = torch.nn.Softmax(0)(orig_output)
         orig_class_index = torch.argmax(orig_output)
-        print("original class is", get_imagenet_topk_classes(orig_probs, 4))
+        orig_class = list(get_imagenet_topk_classes(orig_probs, 1).keys())[0]
+        print("original classes are", get_imagenet_topk_classes(orig_probs, 4))
 
     loss = None
     print("starting adversarial noise generation ...")
@@ -108,7 +118,10 @@ def cli_generate_adv_noisy_image(
         probs = torch.nn.Softmax(0)(output)
         # to enable early stopping
         prev_loss = loss
-        loss = 1 - torch.nn.Sigmoid()(output[0, target_class_index])
+        loss = -1 * torch.log(
+            torch.nn.Sigmoid()(output[0, target_class_index])
+        ) + NOISE_LOSS_PARAM * torch.mean(torch.abs(adv_net.noise_vector))
+
         # TODO  add another loss term to minimize the noise
         target_clss_prob = round(
             torch.nn.Softmax(dim=0)(output.squeeze())[target_class_index].item(),
@@ -118,38 +131,65 @@ def cli_generate_adv_noisy_image(
             torch.nn.Softmax(dim=0)(output.squeeze())[orig_class_index].item(), 3
         )
         print(
-            "prob of target_class: ",
+            f"prob of target_class ({target_class}): ",
             target_clss_prob,
-            " prob of orig class: ",
+            f" prob of orig class ({orig_class}): ",
             orig_clss_prob,
+            get_imagenet_topk_classes(probs.squeeze(), 3),
         )
-        print(get_imagenet_topk_classes(probs.squeeze(), 3))
-        loss.backward(retain_graph=True)
-        optimizer.step()
-        optimizer.zero_grad()
+        print("abs noise mean: ", torch.mean(torch.abs(adv_net.noise_vector)).item())
 
-        stable_loss = prev_loss == loss
-        if stable_loss:
+        end_training = (
+            prev_loss and np.abs(loss.item() - prev_loss.item()) < EARLY_STOP_LOSS_DELTA
+        )
+        if end_training:
             print("\n\n$$$$$$$$$")
             print(f"Loss stable  at {loss}, stopping .. ")
             print("$$$$$$$$$\n\n")
 
-        if iter % 10 == 0 or stable_loss:
-            noisy_image_tensor = transformed_image + adv_net.noise_vector
-            save_image(noisy_image_tensor, output_image_path)
-            # sanity check that nothing is wrong
-            pprint(
-                classify_image(
-                    output_image_path,
-                    img_transform_fn,
-                    model_name,
-                    show_top_k=5,
-                    focus_on_cls_indx=target_class_index,
+        noisy_image_tensor = transformed_image + adv_net.noise_vector
+        if (iter) % 10 == 0 and (
+            output_intermediary_images or output_intermediary_noise
+        ):
+            cur_output_img_path = f"iter_{iter}_" + output_image_path
+            if output_intermediary_images:
+                save_image(noisy_image_tensor, cur_output_img_path)
+            if output_intermediary_noise:
+                # TODO add scale
+                save_image(
+                    adv_net.noise_vector * 5,
+                    "noise_" + cur_output_img_path,
+                    denormalize_tensor=False,
                 )
-            )
+            # sanity check that nothing is wrong
+            if end_training:
+                pprint(
+                    classify_image(
+                        cur_output_img_path,
+                        img_transform_fn,
+                        model_name,
+                        show_top_k=5,
+                        focus_on_cls_indx=target_class_index,
+                    )
+                )
 
-        if stable_loss:
+        if end_training:
             break
+
+        loss.backward()
+        optimizer.step()
+        optimizer.zero_grad()
+
+    save_image(noisy_image_tensor, output_image_path)
+    pprint(
+        classify_image(
+            output_image_path,
+            img_transform_fn,
+            model_name,
+            show_top_k=5,
+            focus_on_cls_indx=target_class_index,
+        )
+    )
 
 
 if __name__ == "__main__":

@@ -91,10 +91,11 @@ def get_target_class_index(target_class: str):
     return matching_classes[0]
 
 
-def save_image(image_tensor: torch.Tensor, image_path: str) -> None:
-    denormalized_noisy_image = denormalize(image_tensor, NORM_MEANS, NORM_STDS)
-    noisy_image: Image.Image = transforms.ToPILImage()(denormalized_noisy_image)
-    noisy_image.save(image_path)
+def save_image(image_tensor: torch.Tensor, image_path: str, denormalize_tensor=True) -> None:
+    if denormalize_tensor:
+        image_tensor = denormalize(image_tensor, NORM_MEANS, NORM_STDS)
+    image: Image.Image = transforms.ToPILImage()(image_tensor)
+    image.save(image_path)
     print("Saved adversarially noisy image in ", image_path)
 
 
@@ -109,7 +110,7 @@ def classify_image(
     transformed_image: torch.Tensor = img_transform_fn(image)  # type: ignore
 
     model = models.__dict__[model_name](
-        weights=models.get_model_weights(model_name).DEFAULT  # type:ignore
+        weights=models.get_model_weights(model_name).DEFAULT  # type: ignore
     )
 
     model.eval()
