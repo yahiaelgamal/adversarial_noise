@@ -48,8 +48,6 @@ class AdvNoiseNetwork(torch.nn.Module):
         for param in self.pretrained_model.parameters():
             param.require_grad = False
 
-        # TODO make this generic
-        # self.noise_vector = torch.rand(size=(3, IMAGE_SIZE-2, IMAGE_SIZE-2))
         self.noise_vector = torch.nn.Parameter(
             torch.rand(size=(3, CENTER_CROP, CENTER_CROP), requires_grad=True)
             * NOISE_SCALE
@@ -61,8 +59,7 @@ class AdvNoiseNetwork(torch.nn.Module):
         return output
 
 
-# TODO make output image configurable
-# TODO resize/crop based on model name, don't assume resnet
+# TODO resize/crop based on model name, don't assume image size
 @click.command()
 @click.option(
     "--image_path",
@@ -121,7 +118,6 @@ def cli_generate_adv_noisy_image(
             torch.nn.Sigmoid()(output[0, target_class_index])
         ) + NOISE_LOSS_PARAM * torch.sum(torch.abs(adv_net.noise_vector))
 
-        # TODO  add another loss term to minimize the noise
         target_clss_prob = round(
             torch.nn.Softmax(dim=0)(output.squeeze())[target_class_index].item(),
             3,
@@ -156,8 +152,8 @@ def cli_generate_adv_noisy_image(
             if output_intermediary_noise:
                 # TODO add scale
                 save_image(
-                    adv_net.noise_vector * 5,
-                    "noise_" + cur_output_img_path,
+                    adv_net.noise_vector * 100,
+                    "scaled_noise_" + cur_output_img_path,
                     denormalize_tensor=False,
                 )
             # sanity check that nothing is wrong

@@ -1,111 +1,104 @@
-#python adversarial_noise/model.py --image_path 'input_images/example_image4.jpg' \
-  --target_class volcano \
-  --output_image_path output_image.jpg \
-  --model_name resnet152 \
-  --output_intermediary_images True \ 
-  --output_intermediary_noise True 
-
-original classes are {'horned_viper': 0.4611509442329407, 'sidewinder': 0.15706218779087067, 'thunder_snake': 0.07749850302934647, 'night_snake': 0.06946844607591629}
-starting adversarial noise generation ...
+original classes are {'horned_viper': 0.4611509442329407, 'sidewinder': 0.15706218779087067, 'thunder_snake': 0.07749850302934647, 'night_snake': 0.06946844607591629
+}                                                                                                                                                                    starting adversarial noise generation ...
 prob of target_class (volcano):  0.0  prob of orig class (horned_viper):  0.461 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
-Mean abs noise:  0.0005004109698347747
+Mean abs noise:  0.0004989175358787179
 Saved adversarially noisy image in  iter_0_output_image.jpg
-Saved adversarially noisy image in  noise_iter_0_output_image.jpg
-prob of target_class (volcano):  0.001  prob of orig class (horned_viper):  0.006 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
-Mean abs noise:  0.0004314411198720336
-prob of target_class (volcano):  0.018  prob of orig class (horned_viper):  0.002 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
-Mean abs noise:  0.00036706766695715487
-prob of target_class (volcano):  0.551  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
-Mean abs noise:  0.0003068195655941963
-prob of target_class (volcano):  0.908  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
-Mean abs noise:  0.0002537159889470786
-prob of target_class (volcano):  0.972  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
-Mean abs noise:  0.00020858051721006632
-prob of target_class (volcano):  0.988  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
-Mean abs noise:  0.000171597974258475
-prob of target_class (volcano):  0.989  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
-Mean abs noise:  0.00014321293565444648
-prob of target_class (volcano):  0.99  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
-Mean abs noise:  0.0001237066026078537
-prob of target_class (volcano):  0.987  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
-Mean abs noise:  0.00011330006964271888
-prob of target_class (volcano):  0.986  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
-Mean abs noise:  0.0001117848078138195
+Saved adversarially noisy image in  scaled_noise_iter_0_output_image.jpg
+prob of target_class (volcano):  0.001  prob of orig class (horned_viper):  0.007 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
+Mean abs noise:  0.0004301464941818267
+prob of target_class (volcano):  0.016  prob of orig class (horned_viper):  0.002 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
+Mean abs noise:  0.0003654590982478112
+prob of target_class (volcano):  0.581  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
+Mean abs noise:  0.00030556117417290807
+prob of target_class (volcano):  0.936  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
+Mean abs noise:  0.0002529078919906169
+prob of target_class (volcano):  0.976  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
+Mean abs noise:  0.0002081121929222718
+prob of target_class (volcano):  0.968  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
+Mean abs noise:  0.0001716549595585093
+prob of target_class (volcano):  0.932  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
+Mean abs noise:  0.00014389980060514063
+prob of target_class (volcano):  0.891  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
+Mean abs noise:  0.00012483618047554046
+prob of target_class (volcano):  0.824  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
+Mean abs noise:  0.0001144854977610521
+prob of target_class (volcano):  0.777  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
+Mean abs noise:  0.00011295039439573884
 Saved adversarially noisy image in  iter_10_output_image.jpg
-Saved adversarially noisy image in  noise_iter_10_output_image.jpg
-prob of target_class (volcano):  0.986  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
-Mean abs noise:  0.00011426689161453396
-prob of target_class (volcano):  0.984  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
-Mean abs noise:  0.00011330641427775845
-prob of target_class (volcano):  0.98  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
-Mean abs noise:  0.0001094279796234332
-prob of target_class (volcano):  0.973  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
-Mean abs noise:  0.00010319240391254425
-prob of target_class (volcano):  0.96  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
-Mean abs noise:  9.537465666653588e-05
-prob of target_class (volcano):  0.939  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
-Mean abs noise:  8.688364323461428e-05
-prob of target_class (volcano):  0.912  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
-Mean abs noise:  7.794380508130416e-05
-prob of target_class (volcano):  0.88  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
-Mean abs noise:  7.003416249062866e-05
-prob of target_class (volcano):  0.844  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
-Mean abs noise:  6.303424015641212e-05
-prob of target_class (volcano):  0.803  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
-Mean abs noise:  5.7761106290854514e-05
+Saved adversarially noisy image in  scaled_noise_iter_10_output_image.jpg
+prob of target_class (volcano):  0.753  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
+Mean abs noise:  0.0001154285273514688
+prob of target_class (volcano):  0.717  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
+Mean abs noise:  0.00011437933426350355
+prob of target_class (volcano):  0.655  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
+Mean abs noise:  0.00011036101204808801
+prob of target_class (volcano):  0.585  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
+Mean abs noise:  0.00010397646110504866
+prob of target_class (volcano):  0.539  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
+Mean abs noise:  9.597813914297149e-05
+prob of target_class (volcano):  0.502  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
+Mean abs noise:  8.730293484404683e-05
+prob of target_class (volcano):  0.465  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
+Mean abs noise:  7.823126361472532e-05
+prob of target_class (volcano):  0.426  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
+Mean abs noise:  7.034042209852487e-05
+prob of target_class (volcano):  0.386  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
+Mean abs noise:  6.33509480394423e-05
+prob of target_class (volcano):  0.341  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
+Mean abs noise:  5.8088477089768276e-05
 Saved adversarially noisy image in  iter_20_output_image.jpg
-Saved adversarially noisy image in  noise_iter_20_output_image.jpg
-prob of target_class (volcano):  0.756  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
-Mean abs noise:  5.5050539231160656e-05
-prob of target_class (volcano):  0.707  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
-Mean abs noise:  5.3500934882322326e-05
-prob of target_class (volcano):  0.66  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
-Mean abs noise:  5.204836270422675e-05
-prob of target_class (volcano):  0.613  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
-Mean abs noise:  5.003324622521177e-05
-prob of target_class (volcano):  0.57  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
-Mean abs noise:  4.674527372117154e-05
-prob of target_class (volcano):  0.53  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
-Mean abs noise:  4.357298166723922e-05
-prob of target_class (volcano):  0.494  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
-Mean abs noise:  4.0390656067756936e-05
-prob of target_class (volcano):  0.462  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
-Mean abs noise:  3.72662725567352e-05
-prob of target_class (volcano):  0.435  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
-Mean abs noise:  3.524805651977658e-05
-prob of target_class (volcano):  0.411  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
-Mean abs noise:  3.360628033988178e-05
+Saved adversarially noisy image in  scaled_noise_iter_20_output_image.jpg
+prob of target_class (volcano):  0.304  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
+Mean abs noise:  5.5428310588467866e-05
+prob of target_class (volcano):  0.271  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
+Mean abs noise:  5.391440208768472e-05
+prob of target_class (volcano):  0.246  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
+Mean abs noise:  5.2527648222167045e-05
+prob of target_class (volcano):  0.226  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
+Mean abs noise:  5.041003896621987e-05
+prob of target_class (volcano):  0.211  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
+Mean abs noise:  4.714611350209452e-05
+prob of target_class (volcano):  0.197  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
+Mean abs noise:  4.394784991745837e-05
+prob of target_class (volcano):  0.186  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
+Mean abs noise:  4.083516978425905e-05
+prob of target_class (volcano):  0.176  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
+Mean abs noise:  3.7750069168396294e-05
+prob of target_class (volcano):  0.167  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
+Mean abs noise:  3.5656234103953466e-05
+prob of target_class (volcano):  0.161  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
+Mean abs noise:  3.3931093639694154e-05
 Saved adversarially noisy image in  iter_30_output_image.jpg
-Saved adversarially noisy image in  noise_iter_30_output_image.jpg
-prob of target_class (volcano):  0.39  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
-Mean abs noise:  3.1837796996114776e-05
-prob of target_class (volcano):  0.371  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
-Mean abs noise:  3.068249498028308e-05
-prob of target_class (volcano):  0.354  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
-Mean abs noise:  2.933879295596853e-05
-prob of target_class (volcano):  0.34  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
-Mean abs noise:  2.7993079129373655e-05
-prob of target_class (volcano):  0.328  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
-Mean abs noise:  2.662737460923381e-05
-prob of target_class (volcano):  0.317  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
-Mean abs noise:  2.573210804257542e-05
-prob of target_class (volcano):  0.306  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
-Mean abs noise:  2.4532282623113133e-05
-prob of target_class (volcano):  0.297  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
-Mean abs noise:  2.324309571122285e-05
-prob of target_class (volcano):  0.289  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
-Mean abs noise:  2.2394417101168074e-05
-prob of target_class (volcano):  0.281  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
-Mean abs noise:  2.1836134692421183e-05
+Saved adversarially noisy image in  scaled_noise_iter_30_output_image.jpg
+prob of target_class (volcano):  0.156  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
+Mean abs noise:  3.21013831126038e-05
+prob of target_class (volcano):  0.151  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
+Mean abs noise:  3.100371395703405e-05
+prob of target_class (volcano):  0.146  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
+Mean abs noise:  2.9706574423471466e-05
+prob of target_class (volcano):  0.141  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
+Mean abs noise:  2.83335230051307e-05
+prob of target_class (volcano):  0.137  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
+Mean abs noise:  2.6928548322757706e-05
+prob of target_class (volcano):  0.134  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
+Mean abs noise:  2.603272514534183e-05
+prob of target_class (volcano):  0.131  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
+Mean abs noise:  2.4790040697553195e-05
+prob of target_class (volcano):  0.128  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
+Mean abs noise:  2.3432055968442e-05
+prob of target_class (volcano):  0.125  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
+Mean abs noise:  2.2562564481631853e-05
+prob of target_class (volcano):  0.123  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
+Mean abs noise:  2.2051295673009008e-05
 
 
 $$$$$$$$$
-Loss stable  at 0.003286949824541807, stopping .. 
+Loss stable  at 0.003319337498396635, stopping .. 
 $$$$$$$$$
 
 
 Saved adversarially noisy image in  iter_40_output_image.jpg
-Saved adversarially noisy image in  noise_iter_40_output_image.jpg
+Saved adversarially noisy image in  scaled_noise_iter_40_output_image.jpg
 {'goldfish': 1.0,
  'great_white_shark': 1.0,
  'hammerhead': 1.0,
@@ -119,4 +112,3 @@ Saved adversarially noisy image in  output_image.jpg
  'tench': 1.0,
  'tiger_shark': 1.0,
  'volcano': 1.0}
-((adversarial_noise) ) ➜  adversarial_noise git:(main) ✗ 
