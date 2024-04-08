@@ -36,7 +36,11 @@ Options:
 
 The package supports imagenet classes and image transformation (mainly resizing, cropping and normalization). A list of classes in file `imagenet_classes.txt`
 
+Two parameters that are would control how fast the process is, num_iteration (which can be set in the the cli interface), 
+and a hardcoded parameter `EARLY_STOP_LOSS_DELTA` in `adversarial_noise/model.py` 
+
 # Example output 
+More data in `example_output` folder in this repo.
 ```
 python adversarial_noise/model.py --image_path 'input_images/example_image4.jpg' \
   --target_class volcano \
