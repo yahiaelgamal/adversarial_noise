@@ -1,7 +1,8 @@
 # Setup
 0.  `cd` to this repo
-1. `pip install -r requirements.txt`
-2. `pip install -e .`
+1.  (optional) use pyenv/conda/virtualenv
+2. `pip install -r requirements.txt`
+3. `pip install -e .`
 ```
 python adversarial_noise/model.py --image_path 'input_images/example_image4.jpg' \
   --target_class volcano \
