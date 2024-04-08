@@ -68,9 +68,8 @@ class AdvNoiseNetwork(torch.nn.Module):
     "--image_path",
     type=click.Path(exists=True),
     required=True,
-    default="input_images/example_image4.jpg",
 )
-@click.option("--target_class", type=str, required=True, default="screw")
+@click.option("--target_class", type=str, required=True)
 @click.option(
     "--output_image_path",
     type=click.Path(exists=False),
@@ -137,7 +136,7 @@ def cli_generate_adv_noisy_image(
             orig_clss_prob,
             get_imagenet_topk_classes(probs.squeeze(), 3),
         )
-        print("abs noise mean: ", torch.mean(torch.abs(adv_net.noise_vector)).item())
+        print("Mean abs noise: ", torch.mean(torch.abs(adv_net.noise_vector)).item())
 
         end_training = (
             prev_loss and np.abs(loss.item() - prev_loss.item()) < EARLY_STOP_LOSS_DELTA
