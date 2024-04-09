@@ -1,4 +1,4 @@
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Tuple, Union
 
 import numpy as np
 import torch
@@ -91,10 +91,20 @@ def get_target_class_index(target_class: str):
     return matching_classes[0]
 
 
-def save_image(image_tensor: torch.Tensor, image_path: str, denormalize_tensor=True) -> None:
+def save_image(
+    image_tensor: torch.Tensor, image_path: str, denormalize_tensor=True
+) -> None:
     if denormalize_tensor:
         image_tensor = denormalize(image_tensor, NORM_MEANS, NORM_STDS)
+    gt_1_vals = torch.sum(image_tensor> 1).item()
+    lt_0_vals = torch.sum(image_tensor< 0).item()
+    if gt_1_vals != 0:
+        print(f'WARNING, some values ({gt_1_vals}) in the image are greater than 1, ')
+    if lt_0_vals != 0:
+        print(f'WARNING, some values ({lt_0_vals}) in the image are less than 0, ')
+        
     image: Image.Image = transforms.ToPILImage()(image_tensor)
+    # image_tensor.shape
     image.save(image_path)
     print("Saved adversarially noisy image in ", image_path)
 
@@ -103,21 +113,25 @@ def classify_image(
     image_path: str,
     img_transform_fn: Any,
     model_name: str,
-    show_top_k=5,
+    topk=5,
     focus_on_cls_indx: Optional[int] = None,
-) -> Dict[str, float]:
+    as_dict=True
+) -> Union[Dict[str, float], List[Tuple[str, float]]]:
     image = Image.open(image_path)
     transformed_image: torch.Tensor = img_transform_fn(image)  # type: ignore
 
-    model = models.__dict__[model_name](
-        weights=models.get_model_weights(model_name).DEFAULT  # type: ignore
-    )
+    model = models.__dict__[model_name](pretrained=True)
 
     model.eval()
     with torch.no_grad():
-        outputs = torch.nn.Softmax(0)(model(transformed_image.unsqueeze(0)))
-    topk_classes = get_imagenet_topk_classes(outputs.squeeze(), show_top_k)
+        output = model(transformed_image.unsqueeze(0))
+        probabilities = torch.nn.Softmax(0)(output[0])
+
+    topk_classes = get_imagenet_topk_classes(probabilities, topk)
     if focus_on_cls_indx:
-        specific_class = get_imagenet_class_prob(outputs.squeeze(), focus_on_cls_indx)
+        specific_class = get_imagenet_class_prob(probabilities, focus_on_cls_indx)
         topk_classes.update(specific_class)
+
+    if not as_dict:
+        topk_classes = sorted(topk_classes.items(), key=lambda x: x[1], reverse=True)
     return topk_classes

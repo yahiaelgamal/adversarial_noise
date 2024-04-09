@@ -1,114 +1,179 @@
-original classes are {'horned_viper': 0.4611509442329407, 'sidewinder': 0.15706218779087067, 'thunder_snake': 0.07749850302934647, 'night_snake': 0.06946844607591629
-}                                                                                                                                                                    starting adversarial noise generation ...
-prob of target_class (volcano):  0.0  prob of orig class (horned_viper):  0.461 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
-Mean abs noise:  0.0004989175358787179
-Saved adversarially noisy image in  iter_0_output_image.jpg
-Saved adversarially noisy image in  scaled_noise_iter_0_output_image.jpg
-prob of target_class (volcano):  0.001  prob of orig class (horned_viper):  0.007 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
-Mean abs noise:  0.0004301464941818267
-prob of target_class (volcano):  0.016  prob of orig class (horned_viper):  0.002 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
-Mean abs noise:  0.0003654590982478112
-prob of target_class (volcano):  0.581  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
-Mean abs noise:  0.00030556117417290807
-prob of target_class (volcano):  0.936  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
-Mean abs noise:  0.0002529078919906169
-prob of target_class (volcano):  0.976  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
-Mean abs noise:  0.0002081121929222718
-prob of target_class (volcano):  0.968  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
-Mean abs noise:  0.0001716549595585093
-prob of target_class (volcano):  0.932  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
-Mean abs noise:  0.00014389980060514063
-prob of target_class (volcano):  0.891  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
-Mean abs noise:  0.00012483618047554046
-prob of target_class (volcano):  0.824  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
-Mean abs noise:  0.0001144854977610521
-prob of target_class (volcano):  0.777  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
-Mean abs noise:  0.00011295039439573884
-Saved adversarially noisy image in  iter_10_output_image.jpg
-Saved adversarially noisy image in  scaled_noise_iter_10_output_image.jpg
-prob of target_class (volcano):  0.753  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
-Mean abs noise:  0.0001154285273514688
-prob of target_class (volcano):  0.717  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
-Mean abs noise:  0.00011437933426350355
-prob of target_class (volcano):  0.655  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
-Mean abs noise:  0.00011036101204808801
-prob of target_class (volcano):  0.585  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
-Mean abs noise:  0.00010397646110504866
-prob of target_class (volcano):  0.539  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
-Mean abs noise:  9.597813914297149e-05
-prob of target_class (volcano):  0.502  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
-Mean abs noise:  8.730293484404683e-05
-prob of target_class (volcano):  0.465  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
-Mean abs noise:  7.823126361472532e-05
-prob of target_class (volcano):  0.426  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
-Mean abs noise:  7.034042209852487e-05
-prob of target_class (volcano):  0.386  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
-Mean abs noise:  6.33509480394423e-05
-prob of target_class (volcano):  0.341  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
-Mean abs noise:  5.8088477089768276e-05
-Saved adversarially noisy image in  iter_20_output_image.jpg
-Saved adversarially noisy image in  scaled_noise_iter_20_output_image.jpg
-prob of target_class (volcano):  0.304  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
-Mean abs noise:  5.5428310588467866e-05
-prob of target_class (volcano):  0.271  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
-Mean abs noise:  5.391440208768472e-05
-prob of target_class (volcano):  0.246  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
-Mean abs noise:  5.2527648222167045e-05
-prob of target_class (volcano):  0.226  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
-Mean abs noise:  5.041003896621987e-05
-prob of target_class (volcano):  0.211  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
-Mean abs noise:  4.714611350209452e-05
-prob of target_class (volcano):  0.197  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
-Mean abs noise:  4.394784991745837e-05
-prob of target_class (volcano):  0.186  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
-Mean abs noise:  4.083516978425905e-05
-prob of target_class (volcano):  0.176  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
-Mean abs noise:  3.7750069168396294e-05
-prob of target_class (volcano):  0.167  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
-Mean abs noise:  3.5656234103953466e-05
-prob of target_class (volcano):  0.161  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
-Mean abs noise:  3.3931093639694154e-05
-Saved adversarially noisy image in  iter_30_output_image.jpg
-Saved adversarially noisy image in  scaled_noise_iter_30_output_image.jpg
-prob of target_class (volcano):  0.156  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
-Mean abs noise:  3.21013831126038e-05
-prob of target_class (volcano):  0.151  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
-Mean abs noise:  3.100371395703405e-05
-prob of target_class (volcano):  0.146  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
-Mean abs noise:  2.9706574423471466e-05
-prob of target_class (volcano):  0.141  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
-Mean abs noise:  2.83335230051307e-05
-prob of target_class (volcano):  0.137  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
-Mean abs noise:  2.6928548322757706e-05
-prob of target_class (volcano):  0.134  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
-Mean abs noise:  2.603272514534183e-05
-prob of target_class (volcano):  0.131  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
-Mean abs noise:  2.4790040697553195e-05
-prob of target_class (volcano):  0.128  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
-Mean abs noise:  2.3432055968442e-05
-prob of target_class (volcano):  0.125  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
-Mean abs noise:  2.2562564481631853e-05
-prob of target_class (volcano):  0.123  prob of orig class (horned_viper):  0.0 {'great_white_shark': 1.0, 'tench': 1.0, 'goldfish': 1.0}
-Mean abs noise:  2.2051295673009008e-05
+python adversarial_noise/model.py --image_path 'input_images/example_image4.jpg' \
+  --target_class volcano \
+  --output_image_path output_image.png \
+  --model_name resnet152 \
+  --output_intermediary_images True \
+  --output_intermediary_noise True
 
 
-$$$$$$$$$
-Loss stable  at 0.003319337498396635, stopping .. 
-$$$$$$$$$
-
-
-Saved adversarially noisy image in  iter_40_output_image.jpg
-Saved adversarially noisy image in  scaled_noise_iter_40_output_image.jpg
-{'goldfish': 1.0,
- 'great_white_shark': 1.0,
- 'hammerhead': 1.0,
- 'tench': 1.0,
- 'tiger_shark': 1.0,
- 'volcano': 1.0}
-Saved adversarially noisy image in  output_image.jpg
-{'goldfish': 1.0,
- 'great_white_shark': 1.0,
- 'hammerhead': 1.0,
- 'tench': 1.0,
- 'tiger_shark': 1.0,
- 'volcano': 1.0}
+/Users/yahiaelgamal/.pyenv/versions/3.10.13/envs/adversarial_noise/lib/python3.10/site-packages/torchvision/models/_utils.py:208: UserWarning: The parame
+ter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.                                                  warnings.warn(
+/Users/yahiaelgamal/.pyenv/versions/3.10.13/envs/adversarial_noise/lib/python3.10/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments 
+other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=ResNet152_Weights.IMAGENET1K_V1`. You can also use `weights=ResNet152_Weights.DEFAULT` to get the most up-to-date weights.                      warnings.warn(msg)
+original classes are {'night_snake': 0.3275839388370514, 'thunder_snake': 0.24706684052944183, 'rock_python': 0.14786472916603088, 'horned_viper': 0.0509
+3905329704285}                                                                                                                                           starting adversarial noise generation ...
+ prob of target_class (volcano):  0.0  prob of orig class (night_snake):  0.385 {'night_snake': 0.3848588764667511, 'thunder_snake': 0.22116272151470184,
+ 'rock_python': 0.12149104475975037}  loss: 1289.5418701171875  output: 0.8347054719924927                                                               Mean abs noise:  0.01119072362780571
+Saved adversarially noisy image in  iter_0_output_image.png
+WARNING, some values (66597) in the image are less than 0, 
+Saved adversarially noisy image in  scaled_noise_iter_0_output_image.png
+noisy_tensor prob:  1.814911911424133e-06
+sanity_check prob:  1.7100701370509341e-06
+[('night_snake', 0.39743664860725403),
+ ('thunder_snake', 0.21899275481700897),
+ ('rock_python', 0.11651045083999634),
+ ('hognose_snake', 0.058193668723106384),
+ ('water_snake', 0.05019785463809967),
+ ('volcano', 1.7100701370509341e-06)]
+------- iter 0
+ prob of target_class (volcano):  0.001  prob of orig class (night_snake):  0.334 {'night_snake': 0.33447760343551636, 'rock_python': 0.16213908791542053
+, 'thunder_snake': 0.13397112488746643}  loss: 1037.4217529296875  output: 0.9950726628303528                                                            Mean abs noise:  0.013325047679245472
+ prob of target_class (volcano):  0.007  prob of orig class (night_snake):  0.252 {'night_snake': 0.2515925467014313, 'rock_python': 0.14111576974391937,
+ 'Indian_cobra': 0.11679983884096146}  loss: 934.637939453125  output: 0.9931736588478088                                                                Mean abs noise:  0.016890674829483032
+ prob of target_class (volcano):  0.011  prob of orig class (night_snake):  0.181 {'night_snake': 0.18102440237998962, 'rock_python': 0.10937755554914474
+, 'Indian_cobra': 0.10836740583181381}  loss: 897.7030029296875  output: 0.9869657754898071                                                              Mean abs noise:  0.020854871720075607
+ prob of target_class (volcano):  0.021  prob of orig class (night_snake):  0.121 {'night_snake': 0.12144093215465546, 'rock_python': 0.09264595061540604
+, 'Indian_cobra': 0.06946710497140884}  loss: 876.4586791992188  output: 0.9875075221061707                                                              Mean abs noise:  0.024347292259335518
+ prob of target_class (volcano):  0.042  prob of orig class (night_snake):  0.097 {'night_snake': 0.09682275354862213, 'rock_python': 0.07701709121465683
+, 'Indian_cobra': 0.04710446298122406}  loss: 861.5825805664062  output: 0.9917048215866089                                                              Mean abs noise:  0.027334043756127357
+ prob of target_class (volcano):  0.052  prob of orig class (night_snake):  0.083 {'night_snake': 0.08278464525938034, 'rock_python': 0.05873155221343040
+5, 'volcano': 0.05214305222034454}  loss: 851.17919921875  output: 0.992017388343811                                                                     Mean abs noise:  0.029922524467110634
+ prob of target_class (volcano):  0.049  prob of orig class (night_snake):  0.069 {'night_snake': 0.06894853711128235, 'volcano': 0.04921028017997742, 'r
+ock_python': 0.046146586537361145}  loss: 844.1552124023438  output: 0.9902446269989014                                                                  Mean abs noise:  0.03218263387680054
+ prob of target_class (volcano):  0.053  prob of orig class (night_snake):  0.054 {'night_snake': 0.05448004975914955, 'volcano': 0.05349567532539368, 'r
+ock_python': 0.03717413917183876}  loss: 838.6763916015625  output: 0.9901248216629028                                                                   Mean abs noise:  0.03417088836431503
+ prob of target_class (volcano):  0.063  prob of orig class (night_snake):  0.042 {'volcano': 0.06329408288002014, 'night_snake': 0.04221978411078453, 'r
+ock_python': 0.030740542337298393}  loss: 833.4769287109375  output: 0.9910411238670349                                                                  Mean abs noise:  0.03592006489634514
+ prob of target_class (volcano):  0.072  prob of orig class (night_snake):  0.034 {'volcano': 0.0722474679350853, 'night_snake': 0.03362731635570526, 'ro
+ck_python': 0.024607589468359947}  loss: 829.9691772460938  output: 0.9917253255844116                                                                   Mean abs noise:  0.037464648485183716
+Saved adversarially noisy image in  iter_10_output_image.png
+WARNING, some values (73450) in the image are less than 0, 
+Saved adversarially noisy image in  scaled_noise_iter_10_output_image.png
+noisy_tensor prob:  0.0722474679350853
+sanity_check prob:  0.07267726957798004
+[('volcano', 0.07267726957798004),
+ ('night_snake', 0.03410961851477623),
+ ('rock_python', 0.025084102526307106),
+ ('Indian_cobra', 0.013688857667148113),
+ ('thunder_snake', 0.013327864930033684)]
+------- iter 10
+ prob of target_class (volcano):  0.081  prob of orig class (night_snake):  0.026 {'volcano': 0.08130449801683426, 'night_snake': 0.026252947747707367, '
+rock_python': 0.01913481391966343}  loss: 826.5601196289062  output: 0.9923261404037476                                                                  Mean abs noise:  0.038830991834402084
+ prob of target_class (volcano):  0.084  prob of orig class (night_snake):  0.021 {'volcano': 0.08432770520448685, 'night_snake': 0.02071390114724636, 'r
+ock_python': 0.01481072511523962}  loss: 823.4459228515625  output: 0.9922878742218018                                                                   Mean abs noise:  0.04003772512078285
+ prob of target_class (volcano):  0.087  prob of orig class (night_snake):  0.017 {'volcano': 0.08743981271982193, 'night_snake': 0.0166021641343832, 'ro
+ck_python': 0.012231063097715378}  loss: 820.6216430664062  output: 0.992319643497467                                                                    Mean abs noise:  0.04110157489776611
+ prob of target_class (volcano):  0.099  prob of orig class (night_snake):  0.013 {'volcano': 0.09855575114488602, 'night_snake': 0.013361241668462753, '
+rock_python': 0.010386659763753414}  loss: 818.1126708984375  output: 0.9930930137634277                                                                 Mean abs noise:  0.04203883931040764
+ prob of target_class (volcano):  0.111  prob of orig class (night_snake):  0.012 {'volcano': 0.11144040524959564, 'night_snake': 0.011595032177865505, '
+rock_python': 0.009086755104362965}  loss: 816.296875  output: 0.993871808052063                                                                         Mean abs noise:  0.042860064655542374
+ prob of target_class (volcano):  0.114  prob of orig class (night_snake):  0.01 {'volcano': 0.11391151696443558, 'night_snake': 0.010336577892303467, 'r
+ock_python': 0.008198840543627739}  loss: 814.72412109375  output: 0.9939178228378296                                                                    Mean abs noise:  0.043573711067438126
+ prob of target_class (volcano):  0.109  prob of orig class (night_snake):  0.009 {'volcano': 0.10903258621692657, 'night_snake': 0.009194061160087585, '
+rock_python': 0.007411083206534386}  loss: 813.2445068359375  output: 0.9935019612312317                                                                 Mean abs noise:  0.044190388172864914
+ prob of target_class (volcano):  0.107  prob of orig class (night_snake):  0.008 {'volcano': 0.1071469858288765, 'night_snake': 0.008195481263101101, 'r
+ock_python': 0.006714286748319864}  loss: 811.8148193359375  output: 0.993281364440918                                                                   Mean abs noise:  0.044717878103256226
+ prob of target_class (volcano):  0.109  prob of orig class (night_snake):  0.007 {'volcano': 0.1087079718708992, 'night_snake': 0.007341928780078888, 'r
+ock_python': 0.006157286465167999}  loss: 810.3604125976562  output: 0.9933121800422668                                                                  Mean abs noise:  0.04516376554965973
+ prob of target_class (volcano):  0.114  prob of orig class (night_snake):  0.007 {'volcano': 0.11428412050008774, 'night_snake': 0.006696029100567102, '
+comic_book': 0.005964034236967564}  loss: 809.056884765625  output: 0.9936231970787048                                                                   Mean abs noise:  0.04553568363189697
+Saved adversarially noisy image in  iter_20_output_image.png
+WARNING, some values (73692) in the image are less than 0, 
+Saved adversarially noisy image in  scaled_noise_iter_20_output_image.png
+noisy_tensor prob:  0.11428412050008774
+sanity_check prob:  0.11435416340827942
+[('volcano', 0.11435416340827942),
+ ('night_snake', 0.00685858353972435),
+ ('rock_python', 0.0058119650930166245),
+ ('comic_book', 0.0056453887373209),
+ ('sleeping_bag', 0.005105404183268547)]
+------- iter 20
+ prob of target_class (volcano):  0.119  prob of orig class (night_snake):  0.006 {'volcano': 0.11937265843153, 'night_snake': 0.00616037379950285, 'comi
+c_book': 0.005759094841778278}  loss: 807.767822265625  output: 0.9938817024230957                                                                       Mean abs noise:  0.045841284096241
+ prob of target_class (volcano):  0.121  prob of orig class (night_snake):  0.006 {'volcano': 0.12064799666404724, 'night_snake': 0.005719479639083147, '
+comic_book': 0.005578165408223867}  loss: 806.551025390625  output: 0.9939090013504028                                                                   Mean abs noise:  0.046082980930805206
+ prob of target_class (volcano):  0.12  prob of orig class (night_snake):  0.005 {'volcano': 0.11954180151224136, 'comic_book': 0.005415302701294422, 'ni
+ght_snake': 0.005410223267972469}  loss: 805.46533203125  output: 0.9938018918037415                                                                     Mean abs noise:  0.04626554995775223
+ prob of target_class (volcano):  0.12  prob of orig class (night_snake):  0.005 {'volcano': 0.11973261833190918, 'comic_book': 0.005266602151095867, 'ni
+ght_snake': 0.0051877135410904884}  loss: 804.4492797851562  output: 0.9937769174575806                                                                  Mean abs noise:  0.04639458283782005
+ prob of target_class (volcano):  0.122  prob of orig class (night_snake):  0.005 {'volcano': 0.12177116423845291, 'comic_book': 0.005103744100779295, 'n
+ight_snake': 0.004960693418979645}  loss: 803.4540405273438  output: 0.9938644766807556                                                                  Mean abs noise:  0.04647402465343475
+ prob of target_class (volcano):  0.124  prob of orig class (night_snake):  0.005 {'volcano': 0.1235375851392746, 'comic_book': 0.004911275114864111, 'al
+p': 0.004793228581547737}  loss: 802.4600219726562  output: 0.993935763835907                                                                            Mean abs noise:  0.04650792106986046
+ prob of target_class (volcano):  0.125  prob of orig class (night_snake):  0.004 {'volcano': 0.12513895332813263, 'alp': 0.004788203630596399, 'comic_bo
+ok': 0.0046868897043168545}  loss: 801.517578125  output: 0.9939996004104614                                                                             Mean abs noise:  0.0464998222887516
+ prob of target_class (volcano):  0.127  prob of orig class (night_snake):  0.004 {'volcano': 0.12718231976032257, 'alp': 0.004801844246685505, 'comic_bo
+ok': 0.00448059756308794}  loss: 800.59375  output: 0.994088888168335                                                                                    Mean abs noise:  0.04645109176635742
+ prob of target_class (volcano):  0.129  prob of orig class (night_snake):  0.004 {'volcano': 0.12932735681533813, 'alp': 0.004837687127292156, 'comic_bo
+ok': 0.0043459306471049786}  loss: 799.6535034179688  output: 0.994183361530304                                                                          Mean abs noise:  0.04636523127555847
+ prob of target_class (volcano):  0.132  prob of orig class (night_snake):  0.004 {'volcano': 0.13227055966854095, 'alp': 0.004885594826191664, 'comic_bo
+ok': 0.004279990680515766}  loss: 798.69091796875  output: 0.9943163990974426                                                                            Mean abs noise:  0.04624340310692787
+Saved adversarially noisy image in  iter_30_output_image.png
+WARNING, some values (73831) in the image are less than 0, 
+Saved adversarially noisy image in  scaled_noise_iter_30_output_image.png
+noisy_tensor prob:  0.13227055966854095
+sanity_check prob:  0.1335528939962387
+[('volcano', 0.1335528939962387),
+ ('alp', 0.00492468336597085),
+ ('comic_book', 0.004381757229566574),
+ ('night_snake', 0.004130374640226364),
+ ('book_jacket', 0.004009213298559189)]
+------- iter 30
+ prob of target_class (volcano):  0.134  prob of orig class (night_snake):  0.004 {'volcano': 0.13429540395736694, 'alp': 0.004916499834507704, 'comic_bo
+ok': 0.004248546436429024}  loss: 797.7085571289062  output: 0.9943986535072327                                                                          Mean abs noise:  0.04608960449695587
+ prob of target_class (volcano):  0.134  prob of orig class (night_snake):  0.004 {'volcano': 0.133891761302948, 'alp': 0.004891197197139263, 'comic_book
+': 0.004199215676635504}  loss: 796.7557373046875  output: 0.9943608641624451                                                                            Mean abs noise:  0.045906152576208115
+ prob of target_class (volcano):  0.133  prob of orig class (night_snake):  0.004 {'volcano': 0.13275375962257385, 'alp': 0.004836519248783588, 'comic_bo
+ok': 0.004161932040005922}  loss: 795.7954711914062  output: 0.9942861199378967                                                                          Mean abs noise:  0.045696012675762177
+ prob of target_class (volcano):  0.133  prob of orig class (night_snake):  0.004 {'volcano': 0.1332552582025528, 'alp': 0.004788328427821398, 'comic_boo
+k': 0.004092436749488115}  loss: 794.8357543945312  output: 0.994295060634613                                                                            Mean abs noise:  0.04546203464269638
+ prob of target_class (volcano):  0.136  prob of orig class (night_snake):  0.004 {'volcano': 0.1357276290655136, 'alp': 0.004755989648401737, 'comic_boo
+k': 0.003964375238865614}  loss: 793.876953125  output: 0.9944022297859192                                                                               Mean abs noise:  0.04520738869905472
+ prob of target_class (volcano):  0.14  prob of orig class (night_snake):  0.004 {'volcano': 0.13990207016468048, 'alp': 0.0047380938194692135, 'comic_bo
+ok': 0.0038246503099799156}  loss: 792.9373779296875  output: 0.9945863485336304                                                                         Mean abs noise:  0.044932734221220016
+ prob of target_class (volcano):  0.141  prob of orig class (night_snake):  0.003 {'volcano': 0.14143696427345276, 'alp': 0.004689827561378479, 'book_jac
+ket': 0.0037756827659904957}  loss: 792.013427734375  output: 0.994644284248352                                                                          Mean abs noise:  0.04463959112763405
+ prob of target_class (volcano):  0.14  prob of orig class (night_snake):  0.003 {'volcano': 0.13980622589588165, 'alp': 0.004613114986568689, 'book_jack
+et': 0.0037454566918313503}  loss: 791.0966186523438  output: 0.9945583343505859                                                                         Mean abs noise:  0.04432901740074158
+ prob of target_class (volcano):  0.14  prob of orig class (night_snake):  0.003 {'volcano': 0.13962627947330475, 'alp': 0.004560062661767006, 'book_jack
+et': 0.0037219682708382607}  loss: 790.1817626953125  output: 0.9945389628410339                                                                         Mean abs noise:  0.04400186985731125
+ prob of target_class (volcano):  0.142  prob of orig class (night_snake):  0.003 {'volcano': 0.14185231924057007, 'alp': 0.004519075155258179, 'book_jac
+ket': 0.0036943473387509584}  loss: 789.27197265625  output: 0.9946303367614746                                                                          Mean abs noise:  0.04365980252623558
+Saved adversarially noisy image in  iter_40_output_image.png
+WARNING, some values (73674) in the image are less than 0, 
+Saved adversarially noisy image in  scaled_noise_iter_40_output_image.png
+noisy_tensor prob:  0.14185231924057007
+sanity_check prob:  0.13881972432136536
+[('volcano', 0.13881972432136536),
+ ('alp', 0.004494305234402418),
+ ('book_jacket', 0.0037365457974374294),
+ ('comic_book', 0.003523592371493578),
+ ('geyser', 0.003392619313672185)]
+------- iter 40
+ prob of target_class (volcano):  0.144  prob of orig class (night_snake):  0.003 {'volcano': 0.14403410255908966, 'alp': 0.004476994276046753, 'book_jac
+ket': 0.0036618311423808336}  loss: 788.372314453125  output: 0.9947180151939392                                                                         Mean abs noise:  0.04330484941601753
+ prob of target_class (volcano):  0.145  prob of orig class (night_snake):  0.003 {'volcano': 0.14513763785362244, 'alp': 0.004437343683093786, 'book_jac
+ket': 0.003637325717136264}  loss: 787.454833984375  output: 0.9947574138641357                                                                          Mean abs noise:  0.042938996106386185
+ prob of target_class (volcano):  0.145  prob of orig class (night_snake):  0.003 {'volcano': 0.1448110044002533, 'alp': 0.004421757999807596, 'book_jack
+et': 0.0036091445945203304}  loss: 786.5363159179688  output: 0.9947353005409241                                                                         Mean abs noise:  0.042564164847135544
+ prob of target_class (volcano):  0.144  prob of orig class (night_snake):  0.003 {'volcano': 0.144224613904953, 'alp': 0.004397438373416662, 'book_jacke
+t': 0.003576005809009075}  loss: 785.634033203125  output: 0.9947020411491394                                                                            Mean abs noise:  0.04218125343322754
+ prob of target_class (volcano):  0.145  prob of orig class (night_snake):  0.003 {'volcano': 0.14510001242160797, 'alp': 0.0043837325647473335, 'book_ja
+cket': 0.003557973075658083}  loss: 784.7412109375  output: 0.9947327375411987                                                                           Mean abs noise:  0.0417921207845211
+ prob of target_class (volcano):  0.145  prob of orig class (night_snake):  0.003 {'volcano': 0.14525847136974335, 'alp': 0.004366431385278702, 'book_jac
+ket': 0.0035621551796793938}  loss: 783.8652954101562  output: 0.9947328567504883                                                                        Mean abs noise:  0.04139832779765129
+ prob of target_class (volcano):  0.147  prob of orig class (night_snake):  0.003 {'volcano': 0.14683897793293, 'alp': 0.004350049886852503, 'book_jacket
+': 0.0035527111031115055}  loss: 782.9962158203125  output: 0.9947939515113831                                                                           Mean abs noise:  0.04099976271390915
+ prob of target_class (volcano):  0.149  prob of orig class (night_snake):  0.003 {'volcano': 0.14900627732276917, 'alp': 0.004319090396165848, 'book_jac
+ket': 0.0035184198059141636}  loss: 782.1323852539062  output: 0.9948781728744507                                                                        Mean abs noise:  0.04059643670916557
+ prob of target_class (volcano):  0.151  prob of orig class (night_snake):  0.003 {'volcano': 0.15128594636917114, 'alp': 0.004290743265300989, 'book_jac
+ket': 0.0034775256644934416}  loss: 781.2776489257812  output: 0.9949648976325989                                                                        Mean abs noise:  0.04019034281373024
+WARNING, some values (12) in the image are greater than 1, 
+WARNING, some values (695) in the image are less than 0, 
+Saved adversarially noisy image in  output_image.png
+Loading new image and performing brand new inference ...
+[('volcano', 0.15796500444412231),
+ ('alp', 0.004260789602994919),
+ ('book_jacket', 0.0034049705136567354),
+ ('comic_book', 0.0033719337079674006),
+ ('geyser', 0.003244126448407769)]
