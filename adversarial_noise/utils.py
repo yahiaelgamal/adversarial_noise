@@ -82,7 +82,7 @@ def get_target_class_index(target_class: str):
         classes = [line.strip().split(", ")[1] for line in f.readlines()]
     matching_classes = [i for i, v in enumerate(classes) if v == target_class]
 
-    if matching_classes == 0:
+    if len(matching_classes) == 0:
         raise ValueError(f"No matching classes for {target_class}")
 
     assert (
