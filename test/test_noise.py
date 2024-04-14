@@ -242,6 +242,7 @@ def test_adv_noise():
         topk=1000,
         focus_on_cls_indx=get_target_class_index(target_cls),
     )
+    assert isinstance(target_probs, dict)
     assert target_probs[target_cls] > target_probs[orig_clss]
 
 
