@@ -74,7 +74,7 @@ def denormalize(img: torch.Tensor, mean: List[float], std: List[float]):
     mean_tensor = torch.Tensor(mean).unsqueeze(1).unsqueeze(2)
     std_tensor = torch.Tensor(std).unsqueeze(1).unsqueeze(2)
 
-    return img * std_tensor + mean_tensor
+    return img.detach().to('cpu') * std_tensor + mean_tensor
 
 
 def get_target_class_index(target_class: str):
@@ -82,7 +82,7 @@ def get_target_class_index(target_class: str):
         classes = [line.strip().split(", ")[1] for line in f.readlines()]
     matching_classes = [i for i, v in enumerate(classes) if v == target_class]
 
-    if matching_classes == 0:
+    if len(matching_classes) == 0:
         raise ValueError(f"No matching classes for {target_class}")
 
     assert (
