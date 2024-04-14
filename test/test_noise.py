@@ -1,3 +1,7 @@
+import os
+import random
+import string
+from typing import Optional
 import torch
 import torchvision.models as models
 import torchvision.transforms as transforms
@@ -16,6 +20,7 @@ from adversarial_noise.utils import (
 )
 import pytest
 
+from test_utils import CREATED_FILE_NAMES, generate_file_name, remove_created_files
 
 def test_image_save():
     image = Image.open("input_images/example_image4.jpg")
@@ -25,18 +30,24 @@ def test_image_save():
     )
     tensor_to_image_f = transforms.ToPILImage()
     # save_image(image_to_tensor_f(image), 'temp_image2.png', denormalize_tensor=False)
-    tensor_to_image_f(image_to_tensor_f(image)).save("temp_image2.png")
+    filename = generate_file_name('.png')
+    tensor_to_image_f(image_to_tensor_f(image)).save(filename)
+    CREATED_FILE_NAMES.append(filename)
 
-    image2 = Image.open("temp_image2.png")
+
+    image2 = Image.open(filename)
     assert (
         torch.all(image_to_tensor_f(image2) == image_to_tensor_f(image)).item() == True
     )
 
-    save_image(image_to_tensor_f(image), "temp_image3.png", denormalize_tensor=False)
-    image3 = Image.open("temp_image3.png")
+    filename2 = generate_file_name('.png')
+    save_image(image_to_tensor_f(image), filename2, denormalize_tensor=False)
+    CREATED_FILE_NAMES.append(filename2)
+    image3 = Image.open(filename2)
     assert (
         torch.all(image_to_tensor_f(image3) == image_to_tensor_f(image)).item() == True
     )
+    remove_created_files()
 
 
 def test_image_save_norm():
@@ -47,24 +58,28 @@ def test_image_save_norm():
     )
     tensor_to_image_f = transforms.ToPILImage()
     # save_image(image_to_tensor_f(image), 'temp_image2.png', denormalize_tensor=False)
-    tensor_to_image_f(image_to_tensor_f(image)).save("temp_image2.png")
+    filename = generate_file_name('.png')
+    tensor_to_image_f(image_to_tensor_f(image)).save(filename)
+    CREATED_FILE_NAMES.append(filename)
 
-    image2 = Image.open("temp_image2.png")
+    image2 = Image.open(filename)
     assert (
         torch.all(
-            image_to_normalized_tensor_f(image2) == image_to_normalized_tensor_f(image)
-        ).item()
-        == True
+            image_to_normalized_tensor_f(image2) == image_to_normalized_tensor_f(image) # type: ignore
+        ).item() == True # type: ignore
     )
 
-    save_image(image_to_tensor_f(image), "temp_image3.png", denormalize_tensor=False)
-    image3 = Image.open("temp_image3.png")
+    filename3 = generate_file_name('.png')
+    save_image(image_to_tensor_f(image), filename3, denormalize_tensor=False)
+    CREATED_FILE_NAMES.append(filename3)
+    image3 = Image.open(filename3)
     assert (
         torch.all(
-            image_to_normalized_tensor_f(image3) == image_to_normalized_tensor_f(image)
-        ).item()
+            image_to_normalized_tensor_f(image3) == image_to_normalized_tensor_f(image) # type: ignore
+        ).item() # type: ignore
         == True
     )
+    remove_created_files()
 
 
 def test_full_transfrom_minus_normalization():
@@ -85,9 +100,13 @@ def test_full_transfrom_minus_normalization():
         image
     )  # normalized # type: ignore
     # image2 = tensor_to_image_f(transformed_image)
-    save_image(transformed_image, "temp_image_5.png", denormalize_tensor=False)
-    image2 = Image.open("temp_image_5.png")
-    assert torch.all(img_transform_fn(image) == img_transform_fn(image2))
+    filename = generate_file_name('.png')
+    save_image(transformed_image, filename, denormalize_tensor=False)
+    CREATED_FILE_NAMES.append(filename)
+    image2 = Image.open(filename)
+    assert torch.all(img_transform_fn(image) == img_transform_fn(image2)) # type: ignore
+    remove_created_files()
+
 
 
 # failing test
@@ -105,10 +124,13 @@ def test_full_transfrom():
     image_to_tensor_f = transforms.ToTensor()
 
     image = Image.open("input_images/example_image5.png")
-    transformed_image_tensor: torch.Tensor = img_transform_fn(image)
+    transformed_image_tensor: torch.Tensor = img_transform_fn(image) # type: ignore
     # image2 = tensor_to_image_f(transformed_image)
-    save_image(transformed_image_tensor, "temp_image_5.png", denormalize_tensor=True)
-    image2 = Image.open("temp_image_5.png")
+    fn = generate_file_name('.png')
+    save_image(transformed_image_tensor, fn, denormalize_tensor=True)
+    CREATED_FILE_NAMES.append(fn)
+    image2 = Image.open(fn)
+
     print("--")
     # TODO too high of a threshold
     assert (
@@ -117,6 +139,8 @@ def test_full_transfrom():
         ).item()
         == True
     )
+
+    remove_created_files()
 
 
 def test_denormalize():
@@ -147,6 +171,8 @@ def test_denormalize():
         == True
     )
 
+    remove_created_files()
+
 
 def test_noise_addition_no_transform():
     transform = transforms.Compose(
@@ -169,6 +195,8 @@ def test_noise_addition_no_transform():
 
     noisy_image2 = add_gaussian_noise(transformed_image, 0.1, 0.1)
     assert not torch.all(transformed_image == noisy_image2).item()
+
+    remove_created_files()
 
 
 def test_resnet_prediction():
@@ -201,15 +229,16 @@ def test_resnet_prediction():
         list(
             classify_image(
                 input_img_path, transform, model_name=model_name, topk=1
-            ).keys()
+            ).keys() # type: ignore
         )[0]
         == "night_snake"
     )
+    remove_created_files()
 
 
 def test_adv_noise():
     input_img_path = "input_images/example_image5.jpg"
-    output_img_path = "output_img.png"
+    output_img_path = generate_file_name('.png')
 
     target_cls = "volcano"
     model_name = "resnet152"
@@ -218,10 +247,11 @@ def test_adv_noise():
         output_image_path=output_img_path,
         target_class=target_cls,
         model_name=model_name,
-        output_intermediary_images=True,
-        output_intermediary_noise=True,
+        output_intermediary_images=False,
+        output_intermediary_noise=False,
         max_iterations=20, # magic number, might result in failures of test
     )
+    CREATED_FILE_NAMES.append(output_img_path)
 
     transform = transforms.Compose(
         [
@@ -233,7 +263,7 @@ def test_adv_noise():
         ]
     )
     orig_clss = list(
-        classify_image(input_img_path, transform, model_name=model_name, topk=1).keys()
+        classify_image(input_img_path, transform, model_name=model_name, topk=1).keys() # type: ignore
     )[0]
     target_probs = classify_image(
         output_img_path,
@@ -244,11 +274,12 @@ def test_adv_noise():
     )
     assert isinstance(target_probs, dict)
     assert target_probs[target_cls] > target_probs[orig_clss]
+    remove_created_files()
 
 
 def test_adv_noise2():
     input_img_path = "input_images/example_image5.jpg"
-    output_img_path = "output_img.png"
+    output_img_path = generate_file_name('.png')
 
     target_cls = "volcano"
     model_name = "vgg16"
@@ -257,10 +288,11 @@ def test_adv_noise2():
         output_image_path=output_img_path,
         target_class=target_cls,
         model_name=model_name,
-        output_intermediary_images=True,
-        output_intermediary_noise=True,
+        output_intermediary_images=False,
+        output_intermediary_noise=False,
         max_iterations=20, # magic number, might result in failures of test
     )
+    CREATED_FILE_NAMES.append(output_img_path)
 
     transform = transforms.Compose(
         [
@@ -281,11 +313,12 @@ def test_adv_noise2():
         topk=1000,
         focus_on_cls_indx=get_target_class_index(target_cls),
     )
-    assert target_probs[target_cls] > target_probs[orig_clss]
+    assert target_probs[target_cls] > target_probs[orig_clss] # type: ignore
+    remove_created_files()
 
 def test_adv_noise3():
     input_img_path = "input_images/example_image4.jpg"
-    output_img_path = "output_img.png"
+    output_img_path = generate_file_name('.png')
 
     target_cls = "volcano"
     model_name = "vgg16"
@@ -294,10 +327,11 @@ def test_adv_noise3():
         output_image_path=output_img_path,
         target_class=target_cls,
         model_name=model_name,
-        output_intermediary_images=True,
-        output_intermediary_noise=True,
+        output_intermediary_images=False,
+        output_intermediary_noise=False,
         max_iterations=20, # magic number, might result in failures of test
     )
+    CREATED_FILE_NAMES.append(output_img_path)
 
     transform = transforms.Compose(
         [
@@ -309,7 +343,7 @@ def test_adv_noise3():
         ]
     )
     orig_clss = list(
-        classify_image(input_img_path, transform, model_name=model_name, topk=1).keys()
+        classify_image(input_img_path, transform, model_name=model_name, topk=1).keys() # type: ignore
     )[0]
     target_probs = classify_image(
         output_img_path,
@@ -318,4 +352,5 @@ def test_adv_noise3():
         topk=1000,
         focus_on_cls_indx=get_target_class_index(target_cls),
     )
-    assert target_probs[target_cls] > target_probs[orig_clss]
+    assert target_probs[target_cls] > target_probs[orig_clss] # type: ignore
+    remove_created_files()

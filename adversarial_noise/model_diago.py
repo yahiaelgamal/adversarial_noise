@@ -241,7 +241,7 @@ def generate_adv_noisy_img(
         if (iter) % 100 == 0:
             cur_output_img_path = f"iter_{iter}_" + output_image_path
             # transforms.ToPILImage()(denormalize(input_opt_net.noise_vector, NORM_MEANS, NORM_STDS)).show()
-            if show_image:
+            if show_images:
                 show_image(input_opt_net.noise_vector)
 
             # sanity check that nothing is wrong
@@ -301,7 +301,7 @@ def generate_adv_noisy_img(
         output_image_path,
         denormalize_tensor=True,
     )
-    if show_image:
+    if show_images:
         show_image(input_opt_net.noise_vector)
     print('Loading new image and performing brand new inference ...')
     pprint(

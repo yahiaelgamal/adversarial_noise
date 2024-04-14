@@ -2,10 +2,11 @@ from torchvision import transforms
 from adversarial_noise.constants import NORM_MEANS, NORM_STDS
 from adversarial_noise.model_diago import CENTER_CROP, IMAGE_SIZE, generate_adv_noisy_img
 from adversarial_noise.utils import RemoveAlphaChannel, classify_image, get_target_class_index
+from test_utils import generate_file_name, CREATED_FILE_NAMES, remove_created_files
 
 
 def test_e2e_gen_noise1():
-    output_img = "volcano_output.png"
+    output_img = generate_file_name('.png')
     target_cls = "volcano"
     model_name = "resnet152"
     generate_adv_noisy_img(
@@ -19,6 +20,7 @@ def test_e2e_gen_noise1():
         # layer_name='pretrained_model.layer4',
         # activation_index_tuple=(0, 250, 2, 1),
     )
+    CREATED_FILE_NAMES.append(output_img)
 
     transform = transforms.Compose(
         [
@@ -39,3 +41,4 @@ def test_e2e_gen_noise1():
     # assert top class is the target class
     assert isinstance(target_probs, dict)
     assert list(target_probs.keys())[0] == target_cls
+    remove_created_files()
