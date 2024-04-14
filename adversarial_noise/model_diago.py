@@ -27,10 +27,10 @@ CENTER_CROP = 224
 DEVICE='mps'
 
 NOISE_SCALE = 0.2 # used to initialize the noise vector
-NOISE_LOSS_PARAM = 10  # to control how much weight to give to noise minimization
+NOISE_LOSS_PARAM = 0.5  # to control how much weight to give to noise minimization
 EARLY_STOP_LOSS_DELTA = 1e-10  # to control when to stop
 EPSILON = 1e-10
-TARGET_LOSS_WEIGHT = 1000 
+TARGET_LOSS_WEIGHT = 1
 
 img_transform_fn = transforms.Compose(
     [
@@ -124,6 +124,7 @@ def generate_adv_noisy_img(
     model_name: str = "resnet152",
     max_iterations: int = 20,
     output_intermediary_images: bool = True,
+    show_images: bool = False,
     target_class: Optional[str] = None,
     layer_name: Optional[str] = None,
     activation_index_tuple: Optional[Tuple[int, ...] ] = None
@@ -163,6 +164,7 @@ def generate_adv_noisy_img(
     # print("starting adversarial noise generation ...")
     metrics = {'loss': 0.0}
     t = trange(max_iterations)
+    cel = torch.nn.CrossEntropyLoss()
     for iter in t:
     # for iter in range(max_iterations):
         output = input_opt_net.forward()
@@ -186,17 +188,13 @@ def generate_adv_noisy_img(
                     [output[0, :target_class_index], output[0, target_class_index + 1 :]]
                 )
             )
-            target_loss = torch.log(target_output)
-            non_target_loss = torch.sum(torch.log(1 - non_target_output))
-            noise_loss = NOISE_LOSS_PARAM * torch.mean(torch.abs(input_opt_net.noise_vector))
-            loss = -(TARGET_LOSS_WEIGHT * target_loss)
-            # loss = -(TARGET_LOSS_WEIGHT * target_loss) + NOISE_LOSS_PARAM * noise_loss
-            # loss = -(TARGET_LOSS_WEIGHT * target_loss) + NOISE_LOSS_PARAM*torch.sigmoid(noise_loss)
-            loss = -(TARGET_LOSS_WEIGHT * target_loss + non_target_loss) + NOISE_LOSS_PARAM*torch.sigmoid(noise_loss)
-            # loss = -(TARGET_LOSS_WEIGHT * target_loss + non_target_loss) + NOISE_LOSS_PARAM * noise_loss
-            # loss = -(TARGET_LOSS_WEIGHT * target_loss + non_target_loss)# + NOISE_LOSS_PARAM * noise_loss
+            ce = cel(output, torch.tensor([target_class_index], dtype=torch.long).to(DEVICE))
+            # noise_loss = NOISE_LOSS_PARAM * torch.sum(torch.abs(input_opt_net.noise_vector))
 
-        t.set_description(f'loss: {loss: .4f}')
+            noise_loss = torch.mean(denormalize(input_opt_net.noise_vector, NORM_MEANS, NORM_STDS))
+            loss = ce #+ NOISE_LOSS_PARAM * noise_loss
+
+        t.set_description(f'loss: {loss: .4f}, ce: {ce: .4f}, noise: {noise_loss: 0.4f}')
 
 
         # non_target_loss = torch.sum(torch.log(1 - non_target_output))
@@ -243,7 +241,8 @@ def generate_adv_noisy_img(
         if (iter) % 100 == 0:
             cur_output_img_path = f"iter_{iter}_" + output_image_path
             # transforms.ToPILImage()(denormalize(input_opt_net.noise_vector, NORM_MEANS, NORM_STDS)).show()
-            show_image(input_opt_net.noise_vector)
+            if show_image:
+                show_image(input_opt_net.noise_vector)
 
             # sanity check that nothing is wrong
             # 
@@ -302,7 +301,8 @@ def generate_adv_noisy_img(
         output_image_path,
         denormalize_tensor=True,
     )
-    show_image(input_opt_net.noise_vector)
+    if show_image:
+        show_image(input_opt_net.noise_vector)
     print('Loading new image and performing brand new inference ...')
     pprint(
         classify_image(
@@ -340,11 +340,12 @@ if __name__ == "__main__":
     # cli_generate_adv_noisy_image()
 
     generate_adv_noisy_img(
-        output_image_path='egyptian_cat_equal_loss_car_noise.png',
+    output_image_path='traffic_light.png',
         model_name='resnet152',
         max_iterations=1000,
-        output_intermediary_images=True,
-        target_class='Egyptian_cat',
+        output_intermediary_images=False,
+        show_images=True,
+        target_class='traffic_light',
         # target_class='German_shepherd'
         # layer_name='pretrained_model.layer4',
         # activation_index_tuple=(0, 250, 2, 1),
