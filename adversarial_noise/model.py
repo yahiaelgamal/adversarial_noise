@@ -127,6 +127,7 @@ def generate_adv_noisy_img(
         print("original classes are", get_imagenet_topk_classes(orig_probs, 4))
 
     loss = None
+    cel = torch.nn.CrossEntropyLoss()
     print("starting adversarial noise generation ...")
     for iter in range(max_iterations):
         output = adv_net.forward(transformed_image)
@@ -140,13 +141,14 @@ def generate_adv_noisy_img(
             )
         )
 
-        target_loss = torch.log(target_output)
-        non_target_loss = torch.sum(torch.log(1 - non_target_output))
+        # target_loss = torch.log(target_output)
+        # non_target_loss = torch.sum(torch.log(1 - non_target_output))
+        ce = cel(output, torch.tensor([target_class_index], dtype=torch.long))
         noise_loss = NOISE_LOSS_PARAM * torch.sum(torch.abs(adv_net.noise_vector))
 
         # loss = -1 * (target_loss)
         # loss = -(1000 * target_loss + non_target_loss)# + noise_loss
-        loss = -(TARGET_LOSS_WEIGHT * target_loss + non_target_loss) + noise_loss
+        loss =  ce + noise_loss
 
         target_clss_prob = round(
             torch.nn.Softmax(dim=0)(output.squeeze())[target_class_index].item(),
