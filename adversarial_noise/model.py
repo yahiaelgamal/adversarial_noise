@@ -65,9 +65,9 @@ class AdvNoiseNetwork(torch.nn.Module):
         min_noise_clip = (
             transforms.Normalize(mean=NORM_MEANS, std=NORM_STDS)(
                 torch.Tensor([0, 0, 0]).view( 3, 1, 1,)
-            )
-            - x
+            ) - x
         )
+        # clip (not the full range, but the remaining range after adding noise to x
         self.noise_vector.data = self.noise_vector.clip(
             min=min_noise_clip, max=max_noise_clip
         )
@@ -117,7 +117,6 @@ def generate_adv_noisy_img(
     # run algorithm
     adv_net = AdvNoiseNetwork(model_name)
     optimizer = torch.optim.AdamW(adv_net.parameters(), lr=0.01)
-    # optimizer = torch.optim.SGD(adv_net.parameters(), lr=0.1)
 
     with torch.no_grad():
         orig_output = adv_net.pretrained_model(transformed_image.unsqueeze(0)).squeeze()
@@ -131,23 +130,13 @@ def generate_adv_noisy_img(
     print("starting adversarial noise generation ...")
     for iter in range(max_iterations):
         output = adv_net.forward(transformed_image)
-        probs = torch.nn.Softmax(0)(output[0])
+        probs: torch.Tensor = torch.nn.Softmax(0)(output[0])
         # to enable early stopping
         prev_loss = loss
-        target_output = torch.sigmoid(output[0, target_class_index])
-        non_target_output = torch.sigmoid(
-            torch.cat(
-                [output[0, :target_class_index], output[0, target_class_index + 1 :]]
-            )
-        )
 
-        # target_loss = torch.log(target_output)
-        # non_target_loss = torch.sum(torch.log(1 - non_target_output))
         ce = cel(output, torch.tensor([target_class_index], dtype=torch.long))
         noise_loss = NOISE_LOSS_PARAM * torch.sum(torch.abs(adv_net.noise_vector))
 
-        # loss = -1 * (target_loss)
-        # loss = -(1000 * target_loss + non_target_loss)# + noise_loss
         loss =  ce + noise_loss
 
         target_clss_prob = round(
@@ -164,7 +153,6 @@ def generate_adv_noisy_img(
             orig_clss_prob,
             get_imagenet_topk_classes(probs.squeeze(), 3),
             f" loss: {loss}",
-            f" output: {target_output}",
         )
         print("Mean abs noise: ", torch.mean(torch.abs(adv_net.noise_vector)).item())
 
@@ -200,7 +188,6 @@ def generate_adv_noisy_img(
             with torch.no_grad():
                 output = new_model(noisy_image_tensor.unsqueeze(0))
                 probabilities = torch.nn.Softmax(0)(output[0])
-            topk_classes = get_imagenet_topk_classes(probabilities, 3)
             target_classes = get_imagenet_topk_classes(probabilities, 1000)[
                 target_class
             ]
@@ -211,7 +198,6 @@ def generate_adv_noisy_img(
             with torch.no_grad():
                 output = new_model(sanity_check_image_tensor.unsqueeze(0))
                 probabilities = torch.nn.Softmax(0)(output[0])
-            topk_classes = get_imagenet_topk_classes(probabilities, 3)
             target_classes = get_imagenet_topk_classes(probabilities, 1000)[
                 target_class
             ]
