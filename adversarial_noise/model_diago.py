@@ -50,6 +50,7 @@ def show_image(vector: torch.Tensor, denorm: bool=True):
     
 def register_activation_hooks(model, layer_names):
     activations = {}
+    print(model)
 
     def get_activation(module, input, output):
         # layer_name = getattr(module, '_modules', {}).get('__self__')  # Extract layer name
@@ -60,6 +61,7 @@ def register_activation_hooks(model, layer_names):
     for name in layer_names:
         name_components = name.split('.')
         module = model
+        # recurse to module by name
         for c in name_components:
             # if c.isdigit():
             #     module = module._modules[c]
@@ -99,16 +101,6 @@ class InputOptimizer(torch.nn.Module):
         ) 
 
     def forward(self):
-        # max_noise_clip = (
-        #     transforms.Normalize(mean=NORM_MEANS, std=NORM_STDS)(
-        #         torch.Tensor([1, 1, 1]).view( 3, 1, 1,)
-        #     )
-        # )
-        # min_noise_clip = (
-        #     transforms.Normalize(mean=NORM_MEANS, std=NORM_STDS)(
-        #         torch.Tensor([0, 0, 0]).view( 3, 1, 1,)
-        #     )
-        # )
         self.noise_vector.data = self.noise_vector.clip(
             min=MIN_NOISE_CLIP, max=MAX_NOISE_CLIP
         )
@@ -166,67 +158,27 @@ def generate_adv_noisy_img(
     t = trange(max_iterations)
     cel = torch.nn.CrossEntropyLoss()
     for iter in t:
-    # for iter in range(max_iterations):
         output = input_opt_net.forward()
         if target_class is None:
             output = activations[layer_names[0]][activation_index_tuple]
 
-        # probs = torch.nn.Softmax(0)(output[0])
-        # # to enable early stopping
         prev_loss = loss
 
 
 
         if target_class is None:
-            loss = torch.Tensor([1000.0]) - output
             target_class_index = None
+            activation_loss = torch.sum(torch.ones_like(output)) - torch.sum(torch.sigmoid(output))
+            noise_loss = torch.mean(denormalize(input_opt_net.noise_vector, NORM_MEANS, NORM_STDS))
+            loss =  activation_loss + noise_loss
+            t.set_description(f'loss: {loss: .4f}, activation loss: {activation_loss: .4f} noise: {noise_loss: 0.4f}')
         else:
             target_class_index = get_target_class_index(target_class)
-            target_output = torch.sigmoid(output[0, target_class_index])
-            non_target_output = torch.sigmoid(
-                torch.cat(
-                    [output[0, :target_class_index], output[0, target_class_index + 1 :]]
-                )
-            )
-            ce = cel(output, torch.tensor([target_class_index], dtype=torch.long).to(DEVICE))
-            # noise_loss = NOISE_LOSS_PARAM * torch.sum(torch.abs(input_opt_net.noise_vector))
+            noise_loss = torch.mean(denormalize(input_opt_net.noise_vector, NORM_MEANS, NORM_STDS)).to(DEVICE)
+            loss = cel(output, torch.tensor([target_class_index], dtype=torch.long).to(DEVICE)) + noise_loss
 
-            noise_loss = torch.mean(denormalize(input_opt_net.noise_vector, NORM_MEANS, NORM_STDS))
-            loss = ce #+ NOISE_LOSS_PARAM * noise_loss
+            t.set_description(f'loss: {loss: .4f}, noise: {noise_loss: 0.4f}')
 
-        t.set_description(f'loss: {loss: .4f}, ce: {ce: .4f}, noise: {noise_loss: 0.4f}')
-
-
-        # non_target_loss = torch.sum(torch.log(1 - non_target_output))
-        # noise_loss = NOISE_LOSS_PARAM * torch.sum(torch.abs(input_opt_net.noise_vector))
-
-        # loss = -1 * (target_loss)
-        # loss = -(1000 * target_loss + non_target_loss)# + noise_loss
-        # loss = -(TARGET_LOSS_WEIGHT * target_loss + non_target_loss) + noise_loss
-
-        # target_clss_prob = round(
-        #     torch.nn.Softmax(dim=0)(output.squeeze())[target_class_index].item(),
-        #     3,
-        # )
-        # orig_clss_prob = round(
-        #     torch.nn.Softmax(dim=0)(output.squeeze())[orig_class_index].item(), 3
-        # )
-        # if target_class is not None:
-            # print(
-            #     # f" prob of target_class ({target_class}): ",
-            #     # target_clss_prob,
-            #     # f" prob of orig class ({orig_class}): ",
-            #     # orig_clss_prob,
-            #     # get_imagenet_topk_classes(probs.squeeze(), 3),
-            #     f" loss: {loss}",
-            #     # f" output: {target_output}",
-            #     f"iter: {iter}"
-            # )
-        # else:
-        #     print(
-        #         f" loss: {loss}", f"iter: {iter}"
-        #     )
-        # tqdm.write(f'loss: {loss}', )
 
         end_training = (
             prev_loss and np.abs(loss.item() - prev_loss.item()) < EARLY_STOP_LOSS_DELTA
@@ -345,10 +297,21 @@ if __name__ == "__main__":
         max_iterations=1000,
         output_intermediary_images=False,
         show_images=True,
-        target_class='traffic_light',
+        # target_class='Egyptian_cat',
+        # target_class='traffic_light',
         # target_class='German_shepherd'
-        # layer_name='pretrained_model.layer4',
-        # activation_index_tuple=(0, 250, 2, 1),
+        # layer_name='pretrained_model.conv2',
+        # activation_index_tuple=(0, 40, 20, ),
+
+        # layer_name='pretrained_model.layer1.0.conv1',
+        # activation_index_tuple=(0, 4,),
+
+        layer_name='pretrained_model.layer2.0.conv1',
+        activation_index_tuple=(0, 40, ),
+
+        # layer_name='pretrained_model.layer4.2.conv1',
+        # activation_index_tuple=(0, 40, ),
+        
     )
 
     # generate_adv_noisy_img(
