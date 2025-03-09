@@ -110,35 +110,33 @@ def test_full_transfrom_minus_normalization():
 
 
 # failing test
-def test_full_transfrom():
+def test_full_transform():
+    # Create a single transform object to ensure consistent behavior
     img_transform_fn = transforms.Compose(
         [
-            transforms.Resize(IMAGE_SIZE),  # this is a problem
+            transforms.Resize(IMAGE_SIZE, interpolation=transforms.InterpolationMode.BICUBIC, antialias=True),
             transforms.CenterCrop(CENTER_CROP),
             transforms.ToTensor(),
             RemoveAlphaChannel(),
             transforms.Normalize(mean=NORM_MEANS, std=NORM_STDS),
         ]
     )
-    tensor_to_image_f = transforms.ToPILImage()
-    image_to_tensor_f = transforms.ToTensor()
 
     image = Image.open("input_images/example_image5.png")
     transformed_image_tensor: torch.Tensor = img_transform_fn(image) # type: ignore
-    # image2 = tensor_to_image_f(transformed_image)
     fn = generate_file_name('.png')
     save_image(transformed_image_tensor, fn, denormalize_tensor=True)
     CREATED_FILE_NAMES.append(fn)
     image2 = Image.open(fn)
 
     print("--")
-    # TODO too high of a threshold
-    assert (
-        torch.sum(
-            torch.abs(transformed_image_tensor - img_transform_fn(image2)) < 0.01
-        ).item()
-        == True
-    )
+    # Use the same transform object for the second image
+    transformed_image2_tensor = img_transform_fn(image2)
+    # Compare pixel differences with a tolerance
+    diff = torch.abs(transformed_image_tensor - transformed_image2_tensor)
+    max_diff = torch.max(diff).item()
+    print(f"Maximum pixel difference: {max_diff}")
+    assert max_diff < 0.01, f"Maximum pixel difference {max_diff} exceeds threshold 0.01"
 
     remove_created_files()
 

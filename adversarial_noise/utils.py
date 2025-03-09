@@ -69,12 +69,20 @@ def denormalize(img: torch.Tensor, mean: List[float], std: List[float]):
     Returns:
         A PyTorch tensor of the denormalized image (same shape as input).
     """
+    # Move tensors to same device as input
+    device = img.device
+    
     # Expand mean and std tensors to match image dimensions (broadcast for element-wise operations)
-    # Add 1 dimension each for H and W
-    mean_tensor = torch.Tensor(mean).unsqueeze(1).unsqueeze(2)
-    std_tensor = torch.Tensor(std).unsqueeze(1).unsqueeze(2)
-
-    return img.detach().to('cpu') * std_tensor + mean_tensor
+    mean_tensor = torch.Tensor(mean).to(device).unsqueeze(1).unsqueeze(2)
+    std_tensor = torch.Tensor(std).to(device).unsqueeze(1).unsqueeze(2)
+    
+    # Add small epsilon to std to prevent division by zero
+    std_tensor = std_tensor.clamp(min=1e-7)
+    
+    # Denormalize with improved numerical stability
+    denormalized = img.detach() * std_tensor + mean_tensor
+    
+    return denormalized
 
 
 def get_target_class_index(target_class: str):
@@ -96,16 +104,23 @@ def save_image(
 ) -> None:
     if denormalize_tensor:
         image_tensor = denormalize(image_tensor, NORM_MEANS, NORM_STDS)
-    gt_1_vals = torch.sum(image_tensor> 1).item()
-    lt_0_vals = torch.sum(image_tensor< 0).item()
+    
+    # Clip values to valid range [0,1] before saving
+    image_tensor = torch.clamp(image_tensor, min=0.0, max=1.0)
+    
+    # Quantize to 8-bit precision to match PNG format
+    image_tensor = torch.round(image_tensor * 255.0) / 255.0
+    
+    gt_1_vals = torch.sum(image_tensor > 1).item()
+    lt_0_vals = torch.sum(image_tensor < 0).item()
     if gt_1_vals != 0:
         print(f'WARNING, some values ({gt_1_vals}) in the image are greater than 1, ')
     if lt_0_vals != 0:
         print(f'WARNING, some values ({lt_0_vals}) in the image are less than 0, ')
         
     image: Image.Image = transforms.ToPILImage()(image_tensor)
-    # image_tensor.shape
-    image.save(image_path)
+    # Save with maximum quality PNG compression
+    image.save(image_path, format='PNG', optimize=False, compress_level=0)
     print("Saved adversarially noisy image in ", image_path)
 
 
