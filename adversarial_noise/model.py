@@ -23,7 +23,7 @@ from torchvision import models
 IMAGE_SIZE = 224
 CENTER_CROP = 224
 
-NOISE_SCALE = 0.01  # used to initialize the noise vector
+NOISE_SCALE = 0.2  # used to initialize the noise vector
 NOISE_LOSS_PARAM = 0.01  # to control how much weight to give to noise minimization
 EARLY_STOP_LOSS_DELTA = 1e-5  # to control when to stop
 EPSILON = 1e-10
